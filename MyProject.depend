@@ -24,3 +24,28 @@
 	<GL/gl.h>
 	<GL/glu.h>
 
+1706273152 source:f:\space-invaders-l1t1\imain.cpp
+	"iGraphics.h"
+	<windows.h>
+	<bits/stdc++.h>
+
+1704428715 f:\space-invaders-l1t1\igraphics.h
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	"glut.h"
+	<time.h>
+	<math.h>
+	"glaux.h"
+
+1704429236 f:\space-invaders-l1t1\glut.h
+	<windows.h>
+	<stdlib.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1704429390 f:\space-invaders-l1t1\glaux.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
