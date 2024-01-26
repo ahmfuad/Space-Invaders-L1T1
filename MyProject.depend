@@ -1,0 +1,26 @@
+# depslib dependency file v1.0
+1706272806 source:f:\assignments\myproject\imain.cpp
+	"iGraphics.h"
+	<windows.h>
+	<bits/stdc++.h>
+
+1704428715 f:\assignments\myproject\igraphics.h
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	"glut.h"
+	<time.h>
+	<math.h>
+	"glaux.h"
+
+1704429236 f:\assignments\myproject\glut.h
+	<windows.h>
+	<stdlib.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1704429390 f:\assignments\myproject\glaux.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
