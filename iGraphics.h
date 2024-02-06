@@ -7,16 +7,20 @@
 //  Version: 2.0.2012.2015
 //
 
-#pragma comment(lib, "glut32.lib")
-#pragma comment(lib, "glaux.lib")
-
 # include <stdio.h>
 # include <stdlib.h>
-#include <windows.h>
-#include "glut.h"
+#pragma comment(lib, "glut32.lib")
+#pragma comment(lib, "glaux.lib")
+#include "GL/glut.h"
 #include <time.h>
 #include <math.h>
-#include "glaux.h"
+#include <windows.h>
+#include <GL/glaux.h>
+
+#ifndef STB_IMAGE_IMPLEMENTATION
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
+#endif
 
 int iScreenHeight, iScreenWidth;
 int iMouseX, iMouseY;
@@ -99,6 +103,9 @@ void iResumeTimer(int index){
 //
 void iShowBMP2(int x, int y, char filename[], int ignoreColor)
 {
+   /// old implementation, causes memory leak
+    /*
+
     AUX_RGBImageRec *TextureImage;
     TextureImage = auxDIBImageLoad(filename);
 
@@ -124,8 +131,89 @@ void iShowBMP2(int x, int y, char filename[], int ignoreColor)
     glDrawPixels(width, height, GL_RGBA, GL_UNSIGNED_BYTE, rgPixels);
 
     delete []rgPixels;
-    free(TextureImage->data);
-    free(TextureImage);
+    free(TextureImage->data);  // this free doesn't work
+    free(TextureImage);  // this free doesn't work
+    */
+
+/// this implementation doesn't work for some bmp files
+//    int i,j;
+//
+//    FILE* f = fopen(filename, "rb");
+//    unsigned char info[54];
+//    fread(info, sizeof(unsigned char), 54, f); // read the 54-byte header
+//
+//    // extract image height and width from header
+//    int width = *(int*)&info[18];
+//    int height = *(int*)&info[22];
+//
+//    printf("width: %d, height: %d\n",width,height);
+//
+//    int nPixels = width * height;
+//    int *rgPixels = new int[nPixels];
+//
+//    int size = 3 * nPixels;
+//    unsigned char* data = new unsigned char[size]; // allocate 3 bytes per pixel
+//    fread(data, sizeof(unsigned char), size, f); // read the rest of the data at once
+//    fclose(f);
+//
+//
+//    for (i = 0, j=0; i < nPixels; i++, j += 3)
+//    {
+//        int bgr = 0;
+//
+//        //for(int k = 2; k >= 0; k--)
+//        for(int k = 0; k < 3; k++)
+//        {
+//
+//            bgr = ((bgr << 8) | data[j+k]);
+//
+//        }
+//
+//        printf("%x\n",bgr);
+//
+//        rgPixels[i] = (bgr == ignoreColor) ? 0 : 255;
+//
+//        rgPixels[i] = ((rgPixels[i] << 24) | bgr);
+//    }
+//
+//    delete []data;
+//
+//    glRasterPos2f(x, y);
+//    glDrawPixels(width, height, GL_RGBA, GL_UNSIGNED_BYTE, rgPixels);
+//
+//    delete []rgPixels;
+
+
+/// this probably works for all types of bmp files
+    int  width, height, n;
+    stbi_set_flip_vertically_on_load(1);
+    unsigned char* image = stbi_load(filename, &width, &height, &n, 4);
+
+    int nPixels = width * height;
+    int *rgPixels = new int[nPixels];
+
+    int i,j;
+    for (i = 0, j=0; i < nPixels; i++, j += 4)
+    {
+        int bgr = 0;
+        for(int k = 2; k >= 0; k--)
+        {
+            bgr = ((bgr << 8) | image[j+k]);
+
+        }
+        //printf("%x\n",bgr);
+
+        rgPixels[i] = (bgr == ignoreColor) ? 0 : 255;
+        rgPixels[i] = ((rgPixels[i] << 24) | bgr);
+    }
+
+    glRasterPos2f(x, y);
+    //glDrawPixels(width, height, GL_RGBA, GL_UNSIGNED_BYTE, image);
+    glDrawPixels(width, height, GL_RGBA, GL_UNSIGNED_BYTE, rgPixels);
+    delete[] rgPixels;
+
+    stbi_image_free(image);
+
 }
 
 void iShowBMP(int x, int y, char filename[])
@@ -146,7 +234,7 @@ void iGetPixelColor (int cursorX, int cursorY, int rgb[])
     //printf("%d %d %d\n",pixel[0],pixel[1],pixel[2]);
 }
 
-void iText(double x, double y, char *str, void* font=GLUT_BITMAP_8_BY_13)
+void iText(GLdouble x, GLdouble y, char *str, void* font=GLUT_BITMAP_8_BY_13)
 {
     glRasterPos3d(x, y, 0);
     int i;
@@ -313,7 +401,7 @@ void iFilledEllipse(double x, double y, double a, double b, int slices=100)
 //  (x, y) - The pivot point for rotation
 //  degree - degree of rotation
 //
-// After calling iRotate(), every subsequent rendering will
+// After calling iRotate(), evrey subsequent rendering will
 // happen in rotated fashion. To stop rotation of subsequent rendering,
 // call iUnRotate(). Typical call pattern would be:
 //      iRotate();
