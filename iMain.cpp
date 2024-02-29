@@ -5,7 +5,7 @@ using namespace std;
 int x = 300, y = 300, r = 20;
 bool soundStatus = 0;
 int game = 0, settings = 0;
-int shooterX = 180, shooterY = 57;
+int shooterX = 180, shooterY = 57, avatar = 0;
 int bulletX, bulletY;
 int enemyState = 1;
 int ovr = 0;
@@ -19,6 +19,8 @@ int allScoreCount = 0;
 int boss = 0, boss_x = -1, boss_y = -1, bossLife = 2;
 int bossBulletX = -1, bossBulletY = -1, bosBulletXChange = -1;
 int enemyCount = 24;
+char shtr[][50] = {"images\\main_shtr.bmp", "images\\main_shtr2.bmp"}; 
+char bck[][50] = {"images\\finalBCK1.bmp", "images\\finalBCK2.bmp"}; 
 
 vector<int> fx;
 vector<int> v;
@@ -595,7 +597,7 @@ void iDraw()
 		}
 		else if (settings == 0)
 		{
-			iShowBMP(2, 40, "images\\finBckk.bmp");
+			iShowBMP(2, 40, bck[avatar]);
 		}
 		else
 		{
@@ -643,16 +645,16 @@ void iDraw()
 			iPauseTimer(3);
 		}
 		if (GG != 1)
-			iShowBMP2(shooterX, shooterY, "images\\main_shtr.bmp", 255);
+			iShowBMP2(shooterX, shooterY, shtr[avatar], 255);
 
 		if (life == 2)
 		{
-			iShowBMP2(20, 65, "images\\main_shtr.bmp", 255);
-			iShowBMP2(60, 65, "images\\main_shtr.bmp", 255);
+			iShowBMP2(20, 65, shtr[avatar], 255);
+			iShowBMP2(60, 65, shtr[avatar], 255);
 		}
 		else if (life == 1)
 		{
-			iShowBMP2(20, 65, "images\\main_shtr.bmp", 0);
+			iShowBMP2(20, 65, shtr[avatar], 0);
 		}
 		else
 		{
@@ -738,6 +740,19 @@ void iMouse(int button, int state, int mx, int my)
 		life = 2;
 		score = 0;
 		initEnemy();
+	}
+	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && mx <= 136 && mx >=  60 && my >= 56 && my <= 139 && settings != 1 && game == 0 && scoreDekha != 1)
+	{
+		// place your codes here
+		avatar = 1;
+		//cout << avatar << endl;
+	}
+	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && mx <= 231 && mx >= 156 && my >= 53 && my <= 136 && settings != 1 && game == 0 && scoreDekha != 1)
+	{
+		// place your codes here
+		
+		avatar = 0;
+		//cout << avatar << endl;
 	}
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && mx >= 537 && mx <= 689 && my >= 136 && my <= 193 && game == 0 && scoreDekha != 1)
 	{
