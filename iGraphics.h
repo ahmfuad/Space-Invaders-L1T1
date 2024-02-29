@@ -208,8 +208,8 @@ void iShowBMP2(int x, int y, char filename[], int ignoreColor)
     }
 
     glRasterPos2f(x, y);
-    //glDrawPixels(width, height, GL_RGBA, GL_UNSIGNED_BYTE, image);
-    glDrawPixels(width, height, GL_RGBA, GL_UNSIGNED_BYTE, rgPixels);
+    glDrawPixels(width, height, GL_RGBA, GL_UNSIGNED_BYTE, image);
+    //glDrawPixels(width, height, GL_RGBA, GL_UNSIGNED_BYTE, rgPixels);
     delete[] rgPixels;
 
     stbi_image_free(image);
