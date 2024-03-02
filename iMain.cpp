@@ -739,6 +739,8 @@ void iMouse(int button, int state, int mx, int my)
 		GG = 0;
 		life = 2;
 		score = 0;
+		enemyCount = 24;
+		boss_x = -1, boss_y = -1;
 		initEnemy();
 	}
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && mx <= 136 && mx >=  60 && my >= 56 && my <= 139 && settings != 1 && game == 0 && scoreDekha != 1)
