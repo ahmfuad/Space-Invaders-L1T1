@@ -103,12 +103,12 @@ The final score is saved in a text file when the game ends because of any three 
 
 Pressing the ‘ESC’ or Exit button on the main menu kills the entire process and closes the game window.
 
-###  Challenges and Fixes
+##  Challenges and Fixes
 - Random Crash: This was my biggest struggle in the whole process. The game used to crash in random places. I checked every algorithm involved, they were okay. Then I tried changing every photo I used. Even I reinstalled the compiler. It was better than before but not fixed yet. Finally, I went through IGraphics, especially iShowBmp() implementation. There were two implementations, one of which was commented out. I uncommented it and commented on the usual one. Finally, the crashing issue was solved.
 - Sound: Usually using Playsound() leads to error. It needs to be compiled with ```- lwinmm```argument in vscode and for code blocks winmm library needs to be linked from compiler linkers. Also, I was planning to play multiple sounds for the game background and bullet shooting. But later I came to know it is not possible to do so.
 - Debugging Coordinates: In this project for option or screen switch, it was a necessity to know the mouse coordinates. Printing them one by one and checking them was an easy yet cumbersome task.
 - Code flow: The code base is not that small so it was a little hard to recall and reorganize all the functions. And after a break, it was hard to regain the previous workflow. It was fun though!
-### Additional<a name="_page5_x72.00_y468.15"></a> Works & Links
+## Additional<a name="_page5_x72.00_y468.15"></a> Works & Links
 - Project Demonstration Video Link: [Click Here](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
 - A GitHub repository was maintained throughout the whole development process. [HERE](https://github.com/ahmfuad/Space-Invaders-L1T1)is the link to the repository. (😉)
 - LATEX was used to write the project report.
