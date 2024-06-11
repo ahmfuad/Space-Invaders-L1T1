@@ -1,3 +1,5 @@
+![image](https://github.com/ahmfuad/Space-Invaders-L1T1/assets/42442668/23a074b6-c928-45ec-b5ad-fedd7e0566a5)
+
 # Introduction
 
 Space Invaders is a 1978 Japanese video game. It is a fixed shooter game. There are simply three characters: Shooter, Enemy, and Boss UFO. There is only one level with a fixed number of enemies. After a certain time, the Boss enemy comes and shoots bullets. Shooter has two lives. Enemies and Boss UFO shoot bullets to destroy the earth. Shooter has to safeguard himself and kill all the enemies. Thus, the shooter will gain points.
